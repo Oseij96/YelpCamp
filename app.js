@@ -12,13 +12,12 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const helmet = require('helmet');
 
 const mongoSanitize = require('express-mongo-sanitize');
-
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
 
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
@@ -157,6 +156,8 @@ app.use((err, req, res, next) => {
     console.log(process.env.CLOUDINARY_SECRET);
 });
 
-app.listen(3000, () => {
-    console.log('Serving on port 3000');
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`);
 });
